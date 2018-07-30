@@ -19,7 +19,8 @@
         },
         "require-dev": {
                 "atk14/files": "*",
-                "atk14/translate": "*"
+                "atk14/translate": "*",
+                "phpunit/phpunit": "4.8.*"
         },
         "autoload": {
                 "classmap": ["src"]
