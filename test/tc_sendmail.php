@@ -13,7 +13,7 @@ class tc_sendmail extends tc_base{
 		$this->assertEquals("Hello from unit test",$ar["subject"]);
 		$this->assertEquals("test@file",$ar["return_path"]);
 		$this->assertTrue((bool)preg_match("/From: test@file/",$ar["headers"]));
-		$this->assertTrue((bool)preg_match("/Content-Type: text\\/plain; charset=us-ascii/",$ar["headers"]));
+		$this->assertTrue((bool)preg_match("/Content-Type: text\\/plain; charset=UTF-8/",$ar["headers"]));
 		$this->assertEquals(true,is_null($ar["accepted_for_delivery"])); // messages are not sent in testing environment
 		$this->assertEquals("-ftest@file",$ar["additional_parameters"]);
 
