@@ -1,0 +1,27 @@
+{
+        "name": "atk14/sendmail",
+        "type": "library",
+        "description": "Sendmail replaces PHP mail function",
+        "keywords": ["mail"],
+        "homepage": "https://github.com/atk14/Sendmail",
+        "license": ["MIT"],
+        "authors": [
+                {
+                        "name": "ATK14 Development Team",
+                        "homepage": "https://github.com/orgs/atk14/people"
+                }
+        ],
+        "require": {
+                "php": ">=5.3.0"
+        },
+        "autoload": {
+                "files": ["src/sendmail.php"]
+        },
+        "require-dev": {
+                "atk14/files": "*",
+                "atk14/translate": "*"
+        },
+        "autoload": {
+                "classmap": ["src"]
+        }
+}
