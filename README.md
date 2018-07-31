@@ -74,6 +74,7 @@ For sending HTML emails there is another function sendhtmlmail().
     $mail_ar = sendhtmlmail([
       "to" => "john@doe.com",
 
+      "subject" => "Sample HTML email",
       "plain" => "Plain text version",
       "html" => "<html>Html version<img src="cid:c8792dkQW"><br><img src="cid:tytdk2392981"></html>",
 
