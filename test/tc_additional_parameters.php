@@ -1,4 +1,6 @@
 <?php
+define("SENDMAIL_MAIL_ADDITIONAL_PARAMETERS","-fbounce@example.com");
+
 class tc_additional_parameters extends tc_base {
 
 	function test(){

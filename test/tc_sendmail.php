@@ -175,17 +175,17 @@ class tc_sendmail extends tc_base{
 
 	function test_bcc(){
 		$ar = sendmail(array());
-		$this->assertEquals("big.brother@somewhere.com",$ar["bcc"]); //konstanta SENDMAIL_BCC_TO
+		$this->assertEquals("",$ar["bcc"]); //konstanta SENDMAIL_BCC_TO
 
 		$ar = sendmail(array(
 			"bcc" => "admin@localhost"
 		));
-		$this->assertEquals("admin@localhost, big.brother@somewhere.com",$ar["bcc"]);
+		$this->assertEquals("admin@localhost",$ar["bcc"]);
 
 		$ar = sendmail(array(
 			"bcc" => array("admin@localhost","","root@localhost","admin@localhost")
 		));
-		$this->assertEquals("admin@localhost, root@localhost, big.brother@somewhere.com",$ar["bcc"]);
+		$this->assertEquals("admin@localhost, root@localhost",$ar["bcc"]);
 	}
 
 	function test_cc(){
@@ -235,7 +235,7 @@ class tc_sendmail extends tc_base{
 			)
 		));
 		$this->assertTrue((bool)preg_match("/cc: his.father@mydomain.com\\n/",$ar["headers"]));
-		$this->assertTrue((bool)preg_match("/bcc: myself@localhost, big.brother@somewhere.com\\n/",$ar["headers"]));
+		$this->assertTrue((bool)preg_match("/bcc: myself@localhost\\n/",$ar["headers"]));
 		$this->assertTrue((bool)preg_match("/From: me@mydomain.com\\n/",$ar["headers"]));
 
 		$this->assertTrue(strlen($ar["body"])>1000);
@@ -273,7 +273,7 @@ class tc_sendmail extends tc_base{
 		));
 		//echo $ar["headers"]."\n".$ar["body"]; exit;
 		$this->assertTrue((bool)preg_match("/cc: his.father@mydomain.com\\n/",$ar["headers"]));
-		$this->assertTrue((bool)preg_match("/bcc: myself@localhost, big.brother@somewhere.com\\n/",$ar["headers"]));
+		$this->assertTrue((bool)preg_match("/bcc: myself@localhost\\n/",$ar["headers"]));
 		$this->assertTrue((bool)preg_match("/From: me@mydomain.com\\n/",$ar["headers"]));
 		$this->assertEquals('-fme@mydomain.com',$ar["additional_parameters"]);
 

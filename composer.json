@@ -16,12 +16,11 @@
         },
         "require-dev": {
                 "atk14/files": "*",
-                "atk14/translate": "*"
+                "atk14/translate": "*",
+                "phpunit/phpunit": "4.8.*"
         },
         "autoload": {
-                "files": ["src/sendmail.php"]
-        },
-        "autoload-dev": {
-                "files": []
+                "files": ["src/sendmail.php"],
+                "classmap": ["src"]
         }
 }
