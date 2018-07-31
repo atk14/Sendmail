@@ -16,10 +16,15 @@ So in a legacy project every mail() occurrence can be replaced with sendmail().
 
 Sendmail can also be called with associative array which offers more options.
 
-    sendmail(array(
+    $mail_ar = sendmail([
       "from" => "info@snakeoil.com",
       "from_name" => "Snake Oil",
       // or "from" => "Snake Oil <info@snakeoil.com>",
+
+      // "return_path" => "info@snakeoil.com",
+
+      // "reply_to" => "reply@snakeoil.com",
+      // "reply_to_name" => "Snake Oil",
 
       "to" => "John Doe <john@doe.com>",
       // "cc" => "",
@@ -27,6 +32,9 @@ Sendmail can also be called with associative array which offers more options.
 
       "subject" => "Thank you for registration",
       "body" => "Dear John\n\nthank you for registration...",
+      // "mime_type" => "text/plain",
+      // "charset" => "UTF-8",
+      // "transfer_encoding" => "quoted-printable",
 
       "attachments" => [
         [
@@ -39,9 +47,25 @@ Sendmail can also be called with associative array which offers more options.
           "mime_type" => "image/png"
         ]
       ],
-    ));
 
-To be continued...
+      // "build_message_only" => false,
+    ]);
+
+Returned value is an associative array, which contains the complete assembled message and also a boolean status "accepted_for_delivery". The array can be used as a parameter for another sendmail() call.
+
+    $mail_ar = sendmail([
+      ...
+      "build_message_only" => true
+    ])
+
+    $mail_ar["to"] = "john@doe.com";
+    sendmail($mail_ar);
+
+    $mail_ar["to"] = "samantha@doe.com";
+    sendmail($mail_ar);
+
+    // and so on
+
 
 Configuration constants
 -----------------------
@@ -52,10 +76,10 @@ There are several constants that affect the default behavior of Sendmail. Please
     define("SENDMAIL_DEFAULT_FROM_NAME","Snake Oil");
     define("SENDMAIL_DEFAULT_BODY_CHARSET","UTF-8");
     define("SENDMAIL_DEFAULT_BODY_MIME_TYPE","text/plain");
-    define("SENDMAIL_BODY_AUTO_PREFIX","");
+    define("SENDMAIL_BODY_AUTO_PREFIX",""); // "This is a testing message\nIgnore it. Do not reply!\n\n\n"
     define("SENDMAIL_USE_TESTING_ADDRESS_TO","");
     define("SENDMAIL_DO_NOT_SEND_MAILS",((defined("DEVELOPMENT") && DEVELOPMENT) || (defined("TEST") && TEST)));
-    define("SENDMAIL_EMPTY_TO_REPLACE","no.email@snakeoil.com");
+    define("SENDMAIL_EMPTY_TO_REPLACE","missing.email@snakeoil.com");
     define("SENDMAIL_DEFAULT_TRANSFER_ENCODING","8bit"); // "8bit" or "quoted-printable"
     define("SENDMAIL_MAIL_ADDITIONAL_PARAMETERS","-fbounce@snakeoil.com");
     define("SENDMAIL_BCC_TO","sent.emails@snakeoil.com");
