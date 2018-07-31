@@ -12,11 +12,11 @@
                 }
         ],
         "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.3.0",
+                "atk14/translate": "1.*"
         },
         "require-dev": {
                 "atk14/files": "*",
-                "atk14/translate": "*",
                 "phpunit/phpunit": "4.8.*"
         },
         "autoload": {
