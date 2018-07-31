@@ -66,6 +66,30 @@ Returned value is an associative array, which contains the complete assembled me
 
     // and so on
 
+Sending HTML emails with images
+-------------------------------
+
+For sending HTML emails there is another function sendhtmlmail().
+
+    $mail_ar = sendhtmlmail([
+      "to" => "john@doe.com",
+
+      "plain" => "Plain text version",
+      "html" => "<html>Html version<img src="cid:c8792dkQW"><br><img src="cid:tytdk2392981"></html>",
+
+      "images" => array(
+        array(
+          "filename" => "sea.gif",
+          "content" => $binary_content,
+          "cid" => "c8792dkQW",
+        ),
+        array(
+          "filename" => "mountain.jpg",
+          "content" => $binary_content_2,
+          "cid" => "tytdk2392981",
+        )
+      )
+    ]);
 
 Configuration constants
 -----------------------
