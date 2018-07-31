@@ -442,7 +442,7 @@ function _sendmail_escape_subject($subject,$charset = null){
 
 	if(Translate::CheckEncoding($subject,"ascii")){ return $subject; }
 
-	if(!$charset && defined("DEFAULT_CHARSET")){ $charset = DEFAULT_CHARSET; }
+	if(!$charset){ $charset = SENDMAIL_DEFAULT_BODY_CHARSET; }
 
 	$out = array();
 	$escape_in_use = false;
