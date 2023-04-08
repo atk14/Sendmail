@@ -1,19 +1,32 @@
 # vim:ts=2:sw=2:et
-dist: precise
+os: linux
+
+# Partner Queue Solution, no credits are consumed
+arch: ppc64le
 
 language: php
 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - 7.1
-  - 7.2
+jobs:
+  include:
+    - php: 5.6
+      dist: xenial
+    - php: 7.0
+      dist: xenial
+    - php: 7.1
+      dist: xenial
+    - php: 7.2
+      dist: xenial
+    - php: 7.3
+      dist: xenial
+    - php: 7.4
+      dist: focal
+    - php: 8.0
+      dist: focal
+    - php: 8.1
+      dist: focal
 
-before_script:
+before_install:
   - composer update --dev
 
 script:
-  - cd test && wget -q https://raw.github.com/atk14/Atk14/master/src/scripts/run_unit_tests && chmod +x run_unit_tests && ./run_unit_tests
+  - cd test && ../vendor/bin/run_unit_tests
