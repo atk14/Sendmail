@@ -1,6 +1,8 @@
 Sendmail
 ========
 
+[![Build Status](https://app.travis-ci.com/atk14/Sendmail.svg?branch=master)](https://app.travis-ci.com/atk14/Sendmail)
+
 Sendmail is a replacement for function mail() in PHP.
 
 Basic usage
