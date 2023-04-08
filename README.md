@@ -1,7 +1,7 @@
 Sendmail
 ========
 
-Sendmail is a replacement function mail() in PHP.
+Sendmail is a replacement for function mail() in PHP.
 
 Basic usage
 -----------
@@ -78,18 +78,18 @@ For sending HTML emails there is another function sendhtmlmail().
       "plain" => "Plain text version",
       "html" => "<html>Html version<img src="cid:c8792dkQW"><br><img src="cid:tytdk2392981"></html>",
 
-      "images" => array(
-        array(
+      "images" => [
+        [
           "filename" => "sea.gif",
           "content" => $binary_content,
           "cid" => "c8792dkQW",
-        ),
-        array(
+        ],
+        [
           "filename" => "mountain.jpg",
           "content" => $binary_content_2,
           "cid" => "tytdk2392981",
-        )
-      )
+        ]
+      ]
     ]);
 
 Configuration constants
