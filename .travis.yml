@@ -33,7 +33,6 @@ jobs:
         - sudo apt update
         - sudo apt install php8.2 php8.2-mbstring
         - php -v
-        - composer update --dev
     - name: "PHP: 8.3"
       dist: jammy
       language: ruby # This makes no sence to me, but it works!
@@ -53,9 +52,8 @@ jobs:
         - sudo apt update
         - sudo apt install php8.4 php8.4-mbstring
         - php -v
-        - composer update --dev
 
-before_install:
+before_script:
   - composer update --dev
 
 script:
