@@ -204,8 +204,8 @@ function sendmail($params = array(),$subject = "",$message = "",$additional_head
 		$_to = _sendmail_render_email_address($TO,$TO_NAME,$BODY_CHARSET);
 		$_from = _sendmail_render_email_address($FROM,$FROM_NAME,$BODY_CHARSET);
 		$_reply_to = $REPLY_TO ? _sendmail_render_email_address($REPLY_TO,$REPLY_TO_NAME,$BODY_CHARSET) : $_from;
-		$HEADERS .= "To: $_to\n";
 		$HEADERS .= "From: $_from\n";
+		$HEADERS .= "To: $_to\n";
 		$HEADERS .= "Reply-To: $_reply_to\n";
 		if($BCC!=""){
 			$HEADERS .= "Bcc: $BCC\n";
