@@ -2,6 +2,10 @@
 
 All notable changes to Sendmail will be documented in this file.
 
+## [1.0.4] - 2025-06-06
+
+* 9a2d709 - Removed development information from body when SENDMAIL_USE_TESTING_ADDRESS_TO is set
+
 ## [1.0.3] - 2025-06-06
 
 * 6902a53 - When SENDMAIL_USE_TESTING_ADDRESS_TO is set, headers X-Original-To, X-Original-Cc and X-Original-Bcc are being added to the message
