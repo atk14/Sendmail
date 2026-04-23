@@ -2,6 +2,10 @@
 
 All notable changes to Sendmail will be documented in this file.
 
+## [1.0.5] - 2026-04-23
+
+* Code cleaned and refactored
+
 ## [1.0.4] - 2025-06-06
 
 * 9a2d709 - Removed development information from body when SENDMAIL_USE_TESTING_ADDRESS_TO is set
