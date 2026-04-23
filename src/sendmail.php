@@ -266,8 +266,12 @@ function sendmail($params = array(),$subject = "",$message = "",$additional_head
 
 	$HEADERS = trim($HEADERS); // na konci hlavicky byl prazdny radek, ve zprave tak byly hlavicky a telo oddeleny 2 radky
 
+	// v $BODY nechceme sekvence \r\n, funguje to spatne
+	// problemy nastavaly v pripade pouziti quoted-printable kodovani
+	$BODY = str_replace("\r","",$BODY);
+
 	$out = array(
-		"to" => $TO, 
+		"to" => $TO,
 		"from" => $FROM,
 		"bcc" => $BCC,
 		"cc" => $CC,
@@ -279,10 +283,6 @@ function sendmail($params = array(),$subject = "",$message = "",$additional_head
 
 		"additional_parameters" => $additional_parameters,
 	);
-
-	// v $BODY nechceme sekvence \r\n, funguje to spatne
-	// problemy nastavaly v pripade pouziti quoted-printable kodovani
-	$BODY = str_replace("\r","",$BODY);
 
 	if($params["build_message_only"]){
 		return $out;
