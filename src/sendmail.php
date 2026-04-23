@@ -396,14 +396,7 @@ function _sendmail_get_boundary(){
 
 function _sendmail_correct_address($addr){
 	if(is_array($addr)){
-		$addr = array_unique($addr);
-		$_addr = array();
-		foreach($addr as $a){
-			if($a == ""){ continue; }
-			$_addr[] = $a;
-		}
-		$addr = $_addr;
-		$addr = join(", ",$addr);
+		$addr = implode(", ", array_filter(array_unique($addr)));
 	}
 	return (string)$addr;
 }
