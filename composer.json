@@ -17,7 +17,7 @@
         },
         "require-dev": {
                 "atk14/files": "*",
-                "atk14/tester": "0.5.*"
+                "atk14/tester": "*"
         },
         "autoload": {
                 "files": ["src/sendmail.php"],
