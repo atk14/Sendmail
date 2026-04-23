@@ -336,9 +336,9 @@ function sendhtmlmail($options){
 	$rel_boundary = _sendmail_get_boundary();
 	$alt_boundary = _sendmail_get_boundary();
 
+	$mime_type = "multipart/related; boundary=\"$rel_boundary\"";
+
 	$body = array();
-	$body[] = "Content-Type: multipart/related; boundary=\"$rel_boundary\"";
-	$body[] = "";
 	$body[] = "--$rel_boundary";
 	$body[] = "Content-Type: multipart/alternative; boundary=\"$alt_boundary\"";
 	$body[] = "";
@@ -371,12 +371,7 @@ function sendhtmlmail($options){
 	}
 	$body[] = "--$rel_boundary--";
 
-	//$boundary = _sendmail_get_boundary();
-	//$body = "--$boundary\n$body\n--$boundary--";
-
-	$options["mime_type"] = array_shift($body); // v prvnim radku je mime_type - momentalne to bude vzdy multipart/related; v budoucnu to muze byt multipart/mixed, pokud budou nejake prilohy
-	$options["mime_type"] = preg_replace("/^Content-Type: /","",$options["mime_type"]);
-	array_shift($body); // prazdny radek
+	$options["mime_type"] = $mime_type;
 	$options["body"] = join("\n",$body);
 	$options["subject"] = _sendmail_escape_subject($options["subject"],$options["charset"]);
 	$options["charset"] = "";
