@@ -190,11 +190,11 @@ function sendmail($params = array(),$subject = "",$message = "",$additional_head
 
 	$ATTACHMENTS = array();
 	if($params['attachments']){
-		for($i = 0; $i<sizeof($params['attachments']);$i++){
+		foreach($params['attachments'] as $att){
 			$ATTACHMENTS[] = array(
-				"body" => $params["attachments"][$i]["body"],
-				"filename" => $params["attachments"][$i]["filename"],
-				"mime_type" => $params["attachments"][$i]["mime_type"]
+				"body" => $att["body"],
+				"filename" => $att["filename"],
+				"mime_type" => $att["mime_type"],
 			);
 		}
 	}
@@ -255,8 +255,8 @@ function sendmail($params = array(),$subject = "",$message = "",$additional_head
 		));
 
 		// pokud jsou, vlozime do e-mailu dalsi prilohy
-		for($i=1;$i<sizeof($ATTACHMENTS);$i++){
-			$mailfile->attach_file($ATTACHMENTS[$i]['filename'],$ATTACHMENTS[$i]['body'],$ATTACHMENTS[$i]['mime_type']);
+		foreach(array_slice($ATTACHMENTS, 1) as $att){
+			$mailfile->attach_file($att['filename'], $att['body'], $att['mime_type']);
 		}
 
 		$mail_ar = $mailfile->getfile();
@@ -510,15 +510,14 @@ function _sendmail_quoted_printable_encode($string,$options = array()){
 		$ar = preg_split('/\r\n/',$string);
 		$out = array();
 		$max_length = 72; // takto nizka hodnota byla zjistena zkusmo - souvisi to se rozmezim {71,73}, ktere je pouzito nize
-		for($i=0;$i<sizeof($ar);$i++){
-			$line = $ar[$i];
+		foreach($ar as $line){
 			if(strlen($line)<=$max_length){ $out[] = $line; continue; }
 			$_line = "";
 			$_first = true;
 			$words = preg_split("/ /",$line);
-			for($j=0;$j<sizeof($words);$j++){
-				$word = $words[$j];
-				$last_word = ($j+1)==sizeof($words);
+			$last_index = count($words) - 1;
+			foreach($words as $j => $word){
+				$last_word = ($j == $last_index);
 				if((strlen($_line) + strlen($word) + ($_first ? 0 : 1)) >= $max_length){
 					if(!$_first){ $out[] = $_line." ="; }
 					$_line = "";
