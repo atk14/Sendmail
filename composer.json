@@ -1,8 +1,8 @@
 {
         "name": "atk14/sendmail",
         "type": "library",
-        "description": "Sendmail is a smart and powerfull replacement for PHP mail function",
-        "keywords": ["mail"],
+        "description": "A powerful replacement for PHP's mail() function with MIME support, attachments, and a custom transport hook",
+        "keywords": ["mail", "email", "sendmail", "mime", "attachments", "smtp"],
         "homepage": "https://github.com/atk14/Sendmail",
         "license": ["MIT"],
         "authors": [
