@@ -53,7 +53,7 @@ Sendmail can also be called with associative array which offers more options.
       // "build_message_only" => false,
     ]);
 
-Returned value is an associative array, which contains the complete assembled message and also a boolean status "accepted_for_delivery". The array can be used as a parameter for another sendmail() call.
+Returned value is an associative array, which contains the complete assembled message and also a status "accepted_for_delivery" (`true` on success, `false` on failure, or `null` when sending is suppressed by the environment). The array can be used as a parameter for another sendmail() call.
 
     $mail_ar = sendmail([
       ...
@@ -74,6 +74,7 @@ Sending HTML emails with images
 For sending HTML emails there is another function sendhtmlmail().
 
     $mail_ar = sendhtmlmail([
+      "from" => "info@snakeoil.com",
       "to" => "john@doe.com",
 
       "subject" => "Sample HTML email",
@@ -110,6 +111,22 @@ There are several constants that affect the default behavior of Sendmail. Please
     define("SENDMAIL_DEFAULT_TRANSFER_ENCODING","8bit"); // "8bit" or "quoted-printable"
     define("SENDMAIL_MAIL_ADDITIONAL_PARAMETERS","-fbounce@snakeoil.com");
     define("SENDMAIL_BCC_TO","sent.emails@snakeoil.com");
+
+Custom sending hook
+-------------------
+
+If a function `sendmail_hook_send()` is defined, it is called instead of the built-in `mail()`. This allows custom transports, logging, or queueing.
+
+    function sendmail_hook_send(array $mail_ar, array $orig_params): array {
+      // $mail_ar contains: to, from, subject, headers, body, accepted_for_delivery, ...
+      // $orig_params contains the original parameters passed to sendmail()
+
+      // custom sending logic here, e.g.:
+      MyMailQueue::push($mail_ar);
+
+      $mail_ar["accepted_for_delivery"] = true;
+      return $mail_ar;
+    }
 
 Installation
 ------------
