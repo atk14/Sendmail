@@ -26,7 +26,7 @@
  * $mailfile = new _CMailFile($subject,$sendto,$replyto,$message,$filename,$mimetype);
  * $mailfile->sendfile();
  *
- * @todo: zbavit se zavislosti na teto tride
+ * @todo: remove dependency on this class
  *
  * @ignore
  */
@@ -43,8 +43,8 @@ class _CMailFile {
 	private $smtp_headers;
 	private $first_attachment;
 	
-	//2009-01-06: konstruktor byl predelan
-	//$subject,$to,$from,$cc,$bcc,$msg,$msg_mimetype,$msg_charset,$filename,&$file_content,$mimetype = "application/octet-stream", $mime_filename = false) 
+	//2009-01-06: constructor was refactored
+	//$subject,$to,$from,$cc,$bcc,$msg,$msg_mimetype,$msg_charset,$filename,&$file_content,$mimetype = "application/octet-stream", $mime_filename = false)
 	function __construct(&$file_content,$options = array()){
 		$this->mime_boundary = _sendmail_get_boundary();
 		$options = array_merge(array(
@@ -144,7 +144,7 @@ class _CMailFile {
 		$out = $out . "Content-Type: multipart/mixed; ";
 		$out = $out . "boundary=\"$this->mime_boundary\"\n";
 		$out = $out . "Content-Transfer-Encoding: 8bit\n";
-		//$out = $out . "X-attachments: $filename;\n\n"; // TODO: tady muze byt vice priloh....
+		//$out = $out . "X-attachments: $filename;\n\n"; // TODO: there can be multiple attachments here...
 		return $out;
 	}
 
